@@ -1,4 +1,4 @@
-import { defineNuxtModule, addTemplate, addPlugin } from '@nuxt/kit'
+import { defineNuxtModule, addTemplate, addPlugin, resolveModule } from '@nuxt/kit'
 import { resolve } from 'pathe'
 import { getAllFileList } from './src/fs'
 import { readFileSync } from 'fs'
@@ -18,9 +18,11 @@ export default defineNuxtModule({
     nuxt.hook('autoImports:dirs', dirs => {
       dirs.push(resolve(runtimeDir, 'composable'))
     })
-    nuxt.hook('builder:extendPlugins', dirs => {
-      console.log(dirs)
-    })
+
+    nuxt.options.alias.pinia = nuxt.options.alias.pinia ||
+      resolveModule('pinia/dist/pinia.mjs', {
+        paths: [nuxt.options.rootDir, import.meta.url],
+      })
 
     nuxt.options.runtimeConfig.public.pinia = options
 
