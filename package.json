@@ -1,6 +1,6 @@
 {
   "name": "nuxt3-pinia",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Nuxt3 module with autoimport and persist, expire option for pinia",
   "main": "index.js",
   "scripts": {
@@ -30,6 +30,7 @@
   "homepage": "https://github.com/rubystarashe/nuxt3-pinia#readme",
   "dependencies": {
     "@nuxt/kit": "3.0.0-rc.6",
+    "@vue/composition-api": "^1.7.0",
     "pinia": ">=2.0.21"
   }
 }
