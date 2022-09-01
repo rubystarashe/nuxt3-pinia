@@ -1,0 +1,31 @@
+{
+  "name": "nuxt3-pinia",
+  "version": "1.0.0",
+  "description": "Nuxt3 module with autoimport and persist, expire option for pinia",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rubystarashe/nuxt3-pinia.git"
+  },
+  "keywords": [
+    "vue",
+    "nuxt",
+    "nuxt3",
+    "pinia",
+    "localstorage",
+    "webstorage",
+    "sessionstorage",
+    "persist",
+    "pinia-persist",
+    "pinia-localstorage"
+  ],
+  "author": "Rubystar Ashe <rubystarashe@gmail.com> (https://github.io/rubystarashe)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rubystarashe/nuxt3-pinia/issues"
+  },
+  "homepage": "https://github.com/rubystarashe/nuxt3-pinia#readme"
+}
