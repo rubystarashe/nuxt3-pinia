@@ -1,6 +1,6 @@
 {
   "name": "nuxt3-pinia",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Nuxt3 module with autoimport and persist, expire option for pinia",
   "main": "index.js",
   "scripts": {
@@ -27,5 +27,8 @@
   "bugs": {
     "url": "https://github.com/rubystarashe/nuxt3-pinia/issues"
   },
-  "homepage": "https://github.com/rubystarashe/nuxt3-pinia#readme"
+  "homepage": "https://github.com/rubystarashe/nuxt3-pinia#readme",
+  "dependencies": {
+    "pinia": "^2.0.21"
+  }
 }

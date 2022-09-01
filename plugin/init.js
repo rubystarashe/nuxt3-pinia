@@ -18,6 +18,7 @@ export default defineNuxtPlugin(async nuxt => {
   Object.keys(storeModels).forEach(route => {
     const query = route.replace('$storeModel_', '').replace('$_default', '').replace(/\$_/g, '/')
     const store = defineStore(query, storeModels[route])
+    
     if (process.client) {
       const state = store()
       let { persist, expire, expirein, version } = typeof storeModels[route] == 'function' ? storeModels[route]() : storeModels[route]

@@ -36,12 +36,13 @@ export default defineNuxtModule({
           const module = await import(filepath)
 
           const replacekey = '$_'
-          const routequery = '$storeModel_' + route.replace(/\//g, replacekey) + replacekey
+          let routequery = ('$storeModel_' + route.replace(/\//g, replacekey) + replacekey).replace('index$_', '')
 
           script += readFileSync(filepath)
             .toString()
             .replace(/export (const|let|var)\s+/g, `export const ${routequery}`)
             .replace('export default', `export const ${routequery}default =`)
+          script += '\n'
 
           keys = keys.concat([`default`, ...Object.keys(module.default || module)]
             .map(e => `${routequery}${e}`)
