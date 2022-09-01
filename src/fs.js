@@ -19,12 +19,10 @@ export const getAllFileList = (path, extension) => {
 
   const loopGetFile = (path, dir = '') => {
     getFolderList(path).forEach(folder => {
-      if (!/pinel\/mods/g.test(path)) {
-        const newPath = path + '/' + folder
-        const newDir = dir + '/' + folder
-        list = [ ...list, ...getFileList(newPath, extension).map(fileName => (newDir + '/' + fileName).replace('/', '')) ]
-        loopGetFile(newPath, newDir)
-      }
+      const newPath = path + '/' + folder
+      const newDir = dir + '/' + folder
+      list = [ ...list, ...getFileList(newPath, extension).map(fileName => (newDir + '/' + fileName).replace('/', '')) ]
+      loopGetFile(newPath, newDir)
     })
   }
   loopGetFile(path)

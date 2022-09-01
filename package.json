@@ -29,8 +29,7 @@
   },
   "homepage": "https://github.com/rubystarashe/nuxt3-pinia#readme",
   "dependencies": {
-    "@nuxt/kit": "3.0.0-rc.6",
-    "vue": "^3.2.38",
+    "vue": ">=3.2.38",
     "pinia": ">=2.0.21"
   }
 }
