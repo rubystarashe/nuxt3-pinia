@@ -12,7 +12,7 @@ Easy to use!
 ** Use Case Screenshot
 ![Alt Text](https://i.imgur.com/3c96lMq.png) 
 
-** Example of Persistent Status Values through WebStorage
+** Example of Persistent State Values through WebStorage
 ![Alt Text](https://i.imgur.com/5DAh6tT.gif)
 
 # Readme Translation
@@ -116,7 +116,7 @@ export default {
     }
   }
 }
-// default is omitted name and can be called as getStore ('depth1/depth2')
+// default is omitted name and can be called as getStore('depth1/depth2')
 export const depth3 = {
   state: () => {
     return {
@@ -124,7 +124,7 @@ export const depth3 = {
     }
   }
 }
-// depth3 can be called as getStore ('depth1/depth2/depth3')
+// depth3 can be called as getStore('depth1/depth2/depth3')
 ```
 
 # Autoimport Directory Option
