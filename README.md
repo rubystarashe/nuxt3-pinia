@@ -29,7 +29,7 @@ npm i nuxt3-pinia
 # Basic Usage
 ```js
 // nuxt.config.js
-import { defineNuxtConfig } from "nuxt"
+import { defineNuxtConfig } from 'nuxt'
 
 export default defineNuxtConfig({
   modules: ['nuxt3-pinia']
