@@ -1,6 +1,6 @@
 {
   "name": "nuxt3-pinia",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "Nuxt3 module with autoimport and persist, expire option for pinia",
   "main": "index.js",
   "scripts": {
@@ -19,6 +19,8 @@
     "webstorage",
     "sessionstorage",
     "persist",
+    "store persistent",
+    "store",
     "pinia-persist",
     "pinia-localstorage"
   ],

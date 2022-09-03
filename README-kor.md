@@ -1,19 +1,19 @@
 # nuxt3-pinia
 
-A module that helps you easily and powerfully use the Pinia state repository in your Nuxt3 environment.
-Provides state value preservation through web storage, and additional options for specifying expiration times and versions of state values for better utilization.
+Nuxt3 환경의 Pinia 상태 저장소를 쉽고 강력하게 사용할 수 있도록 도와주는 모듈입니다.
+웹스토리지를 통한 상태값 보전을 제공하고, 더 잘 활용하기 위해 만료 시간과 상태값의 버전을 지정할 수 있는 추가 옵션을 제공합니다.
 
-Easy to use!
-1. When you create a store folder and create a status store module, the Pinia store is automatically created globally.
-2. Provides an auto-imported global function to provide easy access to the store without any setup/init
-3. Multilayer directories are also automatically recognized, allowing store access through automatically generated distinguished names
-4. Auto-imported Nuxt3 global APIs such as useState can be utilized
+사용이 쉽습니다!
+1. store 폴더를 만들고 상태 저장소 모듈을 작성하면 Pinia 스토어가 자동으로 전역 생성됩니다.
+2. 자동 삽입된 전역 함수를 제공하여 별다른 설정 없이도 스토어에 쉽게 접근할 수 있습니다
+3. 다층 구조의 디렉토리도 자동으로 인식하여, 자동 생성된 구별된 이름을 통해 스토어에 접근할 수 있습니다
+4. useState 등 자동 삽입된 Nuxt3 API 들을 활용할 수 있습니다
 
-** Use Case Screenshot
+** 사용 예제 스크린샷
 ![Alt Text](https://i.imgur.com/3c96lMq.png) 
 
-** Example of Persistent Status Values through WebStorage
-![Alt Text](https://i.imgur.com/5DAh6tT.gif)
+** 웹스토리지를 통한 상태값 보전 예시
+![Alt Text](https://i.imgur.com/5DAh6tT.gif) 
 
 # Readme Translation
 한국어 링크: <https://github.com/rubystarashe/nuxt3-pinia/blob/master/README-kor.md>
@@ -68,7 +68,7 @@ const { increment } = store2
 
 # Directory based store module Auto-Import
 ```js
-// If you set the store module to store/index.js as follows:
+// store/index.js 에 스토어 모듈을 다음과 같이 설정하면,
 export default {
   state: () => {
     return {
@@ -76,7 +76,7 @@ export default {
     }
   }
 }
-// default can be called as getStore('default')
+// default 는 getStore('default')로 호출할 수 있습니다
 export const test = {
   state: () => {
     return {
@@ -84,11 +84,11 @@ export const test = {
     }
   }
 }
-// test can be called as getStore('test')
+// test 는 getStore('test')로 호출할 수 있습니다
 ```
 
 ```js
-// If you set the store module to store/othername.js as follows:
+// store/othername.js 에 스토어 모듈을 다음과 같이 설정하면,
 export default {
   state: () => {
     return {
@@ -96,7 +96,7 @@ export default {
     }
   }
 }
-// default is omitted name and can be called as getStore('othername')
+// default 는 이름이 생략되어 getStore('othername')로 호출할 수 있습니다
 export const nextname = {
   state: () => {
     return {
@@ -104,11 +104,11 @@ export const nextname = {
     }
   }
 }
-// nextname can be called as getStore('othername/nextname')
+// nextname 은 getStore('othername/nextname')로 호출할 수 있습니다
 ```
 
 ```js
-// If you set the store module to store/depth1/depth2.js as follows:
+// store/depth1/depth2.js 에 스토어 모듈을 다음과 같이 설정하면,
 export default {
   state: () => {
     return {
@@ -116,7 +116,7 @@ export default {
     }
   }
 }
-// default is omitted name and can be called as getStore ('depth1/depth2')
+// default 는 이름이 생략되어 getStore('depth1/depth2')로 호출할 수 있습니다
 export const depth3 = {
   state: () => {
     return {
@@ -124,11 +124,11 @@ export const depth3 = {
     }
   }
 }
-// depth3 can be called as getStore ('depth1/depth2/depth3')
+// depth3 은 getStore('depth1/depth2/depth3')로 호출할 수 있습니다
 ```
 
 # Autoimport Directory Option
-You can specify the name of the directory path from which you want to read the store modules
+스토어 모듈들을 읽어올 디렉토리 패스의 이름을 지정할 수 있습니다
 ```js
 //  nuxt.config.js
 import { defineNuxtConfig } from "nuxt"
@@ -136,7 +136,7 @@ import { defineNuxtConfig } from "nuxt"
 export default defineNuxtConfig({
   modules: ['nuxt3-pinia'],
   pinia: {
-    autoImport: 'store' // Default value is 'store'. If it is false, it does not read automatically any folder
+    autoImport: 'store' // 기본 값은 'store'. 만약 false 라면, 자동으로 읽어오지 않습니다
   }
 })
 ```
@@ -145,18 +145,18 @@ export default defineNuxtConfig({
 
 ## Get Store
 ```js
-// get store api
+// 스토어를 가져옵니다
 const store1 = getStore('store1')
 const store2 = store('store2')
 
-// Gets the states of the store as reactive objects
+// 스토어의 state 들을 반응성 객체로 가져옵니다
 const store1_refs = store1.toRefs()
 const store2_refs = storeToRefs(store2)
 const store3_refs = getStoreRefs('store3')
 ```
 
 ## Set Store programmically
-In addition to creating module files in the specified folder, you can create stores within the vue instance
+모듈 파일을 지정한 폴더에 생성하는 방법 외에도, vue 인스턴스 안에서 스토어를 생성할 수 있습니다
 ```js
 const newStore = defineStore('storename', {
   state: () => {
@@ -166,14 +166,14 @@ const newStore = defineStore('storename', {
   }
 })
 const store = newStore()
-// defineStore creates a store object and registers the created store globally
-// Therefore, it can be retrieved from other components through get store api without additional settings
+// defineStore 는 스토어 객체를 생성함과 동시에, 만들어진 스토어를 전역적으로 등록합니다
+// 따라서 추가적인 설정 없이도 get store api를 통해 다른 컴포넌트에서 불러올 수 있습니다
 const store_by_get = getStore('store')
 ```
 
 ## Global Pinia instance and list of stores
-You can access the Nuxt app to get global pinia instance.
-You can also refer to the list of stores registered as modules by referring to pinia.stores or $pinia
+Nuxt app 에 접근하여 pinia 인스턴스를 가져올 수 있습니다.
+pinia.stores 또는 $pinia 를 참조하여 모듈로 등록된 스토어 목록을 참조할 수도 있습니다
 ```js
 const { pinia, $pinia } = useNuxtApp()
 const stores = pinia.stores // === $pinia
@@ -184,7 +184,7 @@ const store2 = pinia.stores['store1']()
 # Store Options
 
 ## Persist Option
-When you create a store, you can specify that the status is stored in web storage by granting the persist option
+스토어를 생성할 때, persist 옵션을 부여하는 것으로 상태가 웹스토리지에 저장되도록 지정할 수 있습니다
 ```js
 export default {
   persist: 'localStorage' // local, localStorage, session, sessionStorage.
@@ -195,7 +195,7 @@ export default {
   }
 }
 ```
-Stores with persist option can see persist point in time through the $persist property of the store
+persist 옵션이 부여된 스토어는, $persist 속성을 통해 persist 시점을 확인할 수 있습니다
 ```vue
 <template>
 <div v-if="store.$persist">
@@ -209,7 +209,7 @@ const store = getStore('default')
 ```
 
 ## Expire Option
-When you create a store, you can set how long the state is stored on the web storage by granting the expire option
+스토어를 생성할 때, expire 옵션을 부여하는 것으로 웹스토리지에 저장된 상태의 저장 기간을 설정할 수 있습니다
 ```js
 export default {
   persist: true,  // === localStorage
@@ -223,7 +223,7 @@ export default {
 ```
 
 ## Version Option
-If the version of the saved state changes, the default value of the new version is saved to web storage without recalling the store state that was previously saved
+저장된 상태의 버전이 바뀌면, 이전에 저장되었던 스토어 상태를 불러오지 않고 새로운 버전의 기본값을 웹스토리지에 저장합니다
 ```js
 export default {
   persist: true,
