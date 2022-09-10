@@ -1,7 +1,7 @@
 {
   "name": "nuxt3-pinia",
-  "version": "1.0.7",
-  "description": "Nuxt3 module with autoimport and persist, expire option for pinia",
+  "version": "1.0.8",
+  "description": "Nuxt3 module with autoimport and secure persist(localstorage, sessionstoage, cookie), expire option for pinia",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

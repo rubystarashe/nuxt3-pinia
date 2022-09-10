@@ -1,11 +1,11 @@
-# nuxt3-pinia
+# nuxt3 pinia
 
-A module that helps you easily and powerfully use the Pinia state repository in your Nuxt3 environment.
-Provides state value preservation through web storage, and additional options for specifying expiration times and versions of state values for better utilization.
+A nuxt3 module that helps you easily and powerfully use the Pinia state repository.
+Provides state value preservation through web storage(localstorage, sessionstorage), and additional options for specifying expiration times and versions of state values for better utilization.
 
 Easy to use!
 1. When you create a store folder and create a status store module, the Pinia store is automatically created globally.
-2. Provides an auto-imported global function to provide easy access to the store without any setup/init
+2. Provides auto-imported global functions to easy access to the store without any setup/init
 3. Multilayer directories are also automatically recognized, allowing store access through automatically generated distinguished names
 4. Auto-imported Nuxt3 global APIs such as useState can be utilized
 
@@ -15,18 +15,18 @@ Easy to use!
 ** Example of Persistent State Values through WebStorage
 ![Alt Text](https://i.imgur.com/5DAh6tT.gif)
 
-# Readme Translation
+## Readme Translation
 한국어 링크: <https://github.com/rubystarashe/nuxt3-pinia/blob/master/README-kor.md>
 
-# Example
+## Example
 <https://github.com/rubystarashe/nuxt3-pinia-playground>
 
-# Installation
+## Installation
 ```
 npm i nuxt3-pinia
 ```
 
-# Basic Usage
+## Basic Usage
 ```js
 // nuxt.config.js
 import { defineNuxtConfig } from 'nuxt'
@@ -66,7 +66,7 @@ const { increment } = store2
 </script>
 ```
 
-# Directory based store module Auto-Import
+## Directory based store module Auto-Import
 ```js
 // If you set the store module to store/index.js as follows:
 export default {
@@ -127,7 +127,7 @@ export const depth3 = {
 // depth3 can be called as getStore('depth1/depth2/depth3')
 ```
 
-# Autoimport Directory Option
+## Autoimport Directory Option
 You can specify the name of the directory path from which you want to read the store modules
 ```js
 //  nuxt.config.js
@@ -141,9 +141,9 @@ export default defineNuxtConfig({
 })
 ```
 
-# AutoImported API
+## AutoImported API
 
-## Get Store
+### Get Store
 ```js
 // get store api
 const store1 = getStore('store1')
@@ -153,9 +153,10 @@ const store2 = store('store2')
 const store1_refs = store1.toRefs()
 const store2_refs = storeToRefs(store2)
 const store3_refs = getStoreRefs('store3')
+const store4_refs = storeRefs('store4')
 ```
 
-## Set Store programmically
+### Set Store programmically
 In addition to creating module files in the specified folder, you can create stores within the vue instance
 ```js
 const newStore = defineStore('storename', {
@@ -165,13 +166,12 @@ const newStore = defineStore('storename', {
     }
   }
 })
-const store = newStore()
 // defineStore creates a store object and registers the created store globally
 // Therefore, it can be retrieved from other components through get store api without additional settings
-const store_by_get = getStore('store')
+const store_by_get = getStore('storename')
 ```
 
-## Global Pinia instance and list of stores
+### Global Pinia instance and list of stores
 You can access the Nuxt app to get global pinia instance.
 You can also refer to the list of stores registered as modules by referring to pinia.stores or $pinia
 ```js
@@ -181,9 +181,9 @@ const store1 = $pinia['store1']()
 const store2 = pinia.stores['store1']()
 ```
 
-# Store Options
+## Store Options
 
-## Persist Option
+### Persist Option
 When you create a store, you can specify that the status is stored in web storage by granting the persist option
 ```js
 export default {
@@ -208,7 +208,7 @@ const store = getStore('default')
 </script>
 ```
 
-## Expire Option
+### Expire Option
 When you create a store, you can set how long the state is stored on the web storage by granting the expire option
 ```js
 export default {
@@ -222,7 +222,7 @@ export default {
 }
 ```
 
-## Version Option
+### Version Option
 If the version of the saved state changes, the default value of the new version is saved to web storage without recalling the store state that was previously saved
 ```js
 export default {
@@ -236,6 +236,6 @@ export default {
 }
 ```
 
-# Next
+## Next
 1. Secure mode for persist option
 2. Persist state with Cookie mode

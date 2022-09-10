@@ -42,7 +42,8 @@ export const getStoreRefs = storeName => {
 export const defineStore = (name, option) => {
   const { public: { pinia: { appName } } } = useRuntimeConfig()
   const pinia = useNuxtApp()[`${appName}`]
-  const store = _defineStore(name, option)
-  pinia.stores[name] = store
+  pinia.stores[name] = _defineStore(name, option)
+  const store = pinia.stores[name]()
+  store.toRefs = () => storeToRefs(store)
   return store
 }
