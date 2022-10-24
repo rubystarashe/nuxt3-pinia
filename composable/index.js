@@ -3,7 +3,7 @@ import { useRuntimeConfig, useNuxtApp } from '#app'
 
 export const storeToRefs = _storeToRefs
 
-export const getStore = (storeName, initStore) => {
+export const getStore = (storeName = 'default', initStore) => {
   try {
     const { public: { pinia: { provideName } } } = useRuntimeConfig()
     const $pinia = useNuxtApp()[`$${provideName}`]
@@ -22,7 +22,7 @@ export const getStore = (storeName, initStore) => {
 }
 export const store = getStore
 
-export const getStoreRefs = storeName => {
+export const getStoreRefs = (storeName = 'default', initStore) => {
   try {
     const { public: { pinia: { provideName } } } = useRuntimeConfig()
     const $pinia = useNuxtApp()[`$${provideName}`]
@@ -38,7 +38,7 @@ export const getStoreRefs = storeName => {
   }
 }
 
-export const defineStore = (name, option) => {
+export const defineStore = (name = 'default', option) => {
   const { public: { pinia: { appName } } } = useRuntimeConfig()
   const pinia = useNuxtApp()[`${appName}`]
   pinia.stores[name] = _defineStore(name, option)
