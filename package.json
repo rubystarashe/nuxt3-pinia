@@ -1,6 +1,6 @@
 {
   "name": "nuxt3-pinia",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "Nuxt3 module with autoimport and secure persist(localstorage, sessionstoage, cookie), expire option for pinia",
   "main": "index.js",
   "scripts": {
@@ -32,6 +32,7 @@
   "homepage": "https://github.com/rubystarashe/nuxt3-pinia#readme",
   "dependencies": {
     "vue": ">=3.2.38",
-    "pinia": ">=2.0.21"
+    "pinia": ">=2.0.21",
+    "nuxt": ">=3.0.0-rc.9"
   }
 }

@@ -1,4 +1,4 @@
-import { defineNuxtModule, addTemplate, addPlugin, resolveModule } from '@nuxt/kit'
+import { defineNuxtModule, addTemplate, addPlugin, addPluginTemplate, resolveModule } from '@nuxt/kit'
 import { resolve } from 'pathe'
 import { getAllFileList } from './src/fs'
 import { readFileSync } from 'fs'
@@ -15,7 +15,7 @@ export default defineNuxtModule({
   },
   async setup (options, nuxt) {
     const runtimeDir = resolve('./node_modules/nuxt3-pinia')
-    nuxt.hook('autoImports:dirs', dirs => {
+    nuxt.hook('imports:dirs', dirs => {
       dirs.push(resolve(runtimeDir, 'composable'))
     })
 
@@ -27,6 +27,11 @@ export default defineNuxtModule({
     nuxt.options.runtimeConfig.public.pinia = options
 
     const prefix = typeof options.autoImport == 'boolean' ? 'store' : options.autoImport
+
+    let storeModels = `import { createPinia } from 'pinia'
+      const storeModels = {
+        global: () => useNuxtApp()
+    `
 
     const storeRoutes = getAllFileList(prefix, 'js')
     if (options.autoImport) {
@@ -42,8 +47,8 @@ export default defineNuxtModule({
 
           script += readFileSync(filepath)
             .toString()
-            .replace(/export (const|let|var)\s+/g, `export const ${routequery}`)
-            .replace('export default', `export const ${routequery}default =`)
+            .replace(/export (const|let|var)\s(.*?)=/g, `,${routequery}$2:`)
+            .replace('export default', `,${routequery}default:`)
           script += '\n'
 
           keys = keys.concat([`default`, ...Object.keys(module.default || module)]
@@ -53,23 +58,18 @@ export default defineNuxtModule({
           console.error(error)
         }
       }
-
-      addTemplate({
-        filename: `pinia.store.model.mjs`,
-        getContents: () => {
-          return `
-            ${script}
-            export default {
-              ${keys.join(',')}
-            }
-          `
-        },
-        write: true
-      })
+      
+      storeModels += `${script}\n}`
     }
 
-    addPlugin({
-      src: resolve(runtimeDir, 'plugin/init.js')
+    addPluginTemplate({
+      filename: '@nuxt3-pinia.mjs',
+      getContents: () => {
+        return `
+          ${storeModels}
+          ${readFileSync(resolve(runtimeDir, 'plugin/init.js')).toString()}
+        `
+      }
     })
   }
 })

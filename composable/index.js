@@ -3,7 +3,7 @@ import { useRuntimeConfig, useNuxtApp } from '#app'
 
 export const storeToRefs = _storeToRefs
 
-export const getStore = storeName => {
+export const getStore = (storeName, initStore) => {
   try {
     const { public: { pinia: { provideName } } } = useRuntimeConfig()
     const $pinia = useNuxtApp()[`$${provideName}`]
@@ -11,13 +11,12 @@ export const getStore = storeName => {
     store.toRefs = () => storeToRefs(store)
     return store
   } catch (error) {
-    if (process?.dev) console.error(`[store api] The store name ${storeName} has not been declared, it insteadly declared from getter method. Please check the store specification.`, error)
-    const store = defineStore(storeName, {
+    if (process?.dev && !initStore) console.error(`[store api] The store name ${storeName} has not been declared, it insteadly declared from getter method. Please check the store specification.`, error)
+    const store = defineStore(storeName, initStore || {
       state: () => {
         return {}
       }
-    })()
-    store.toRefs = () => storeToRefs(store)
+    })
     return store
   }
 }
@@ -29,8 +28,8 @@ export const getStoreRefs = storeName => {
     const $pinia = useNuxtApp()[`$${provideName}`]
     return storeToRefs($pinia[storeName]())
   } catch (error) {
-    if (process?.dev) console.error(`[store api] The store name ${storeName} has not been declared, it insteadly declared from getter method. Please check the store specification.`, error)
-    const store = defineStore(storeName, {
+    if (process?.dev && !initStore) console.error(`[store api] The store name ${storeName} has not been declared, it insteadly declared from getter method. Please check the store specification.`, error)
+    const store = defineStore(storeName, initStore || {
       state: () => {
         return {}
       }

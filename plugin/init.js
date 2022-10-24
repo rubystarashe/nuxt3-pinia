@@ -1,9 +1,3 @@
-import { defineNuxtPlugin, useRuntimeConfig } from '#app'
-import { createPinia } from 'pinia'
-import { reactive, watch } from 'vue'
-import storeModels from '#build/pinia.store.model.mjs'
-import { defineStore } from '../composable'
-
 export default defineNuxtPlugin(async nuxt => {
   const { public: { pinia: { appName, provideName } } } = useRuntimeConfig()
 
@@ -68,7 +62,7 @@ export default defineNuxtPlugin(async nuxt => {
       }
     }
   })
-
+  
   return {
     provide
   }
