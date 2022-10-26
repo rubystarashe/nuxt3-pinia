@@ -45,10 +45,16 @@ export default defineNuxtModule({
           const replacekey = '$_'
           let routequery = ('$storeModel_' + route.replace(/\//g, replacekey) + replacekey).replace('index$_', '')
 
-          script += readFileSync(filepath)
+          let ns = readFileSync(filepath)
             .toString()
             .replace(/export (const|let|var)\s(.*?)=/g, `,${routequery}$2:`)
             .replace('export default', `,${routequery}default:`)
+            .split('\n')
+
+          ns.filter(e => e.trim().startsWith('import')).forEach(e => storeModels = e + '\n' + storeModels)
+          ns = ns.filter(e => !e.trim().startsWith('import')).join('\n')
+
+          script += ns
           script += '\n'
 
           keys = keys.concat([`default`, ...Object.keys(module.default || module)]
@@ -58,7 +64,7 @@ export default defineNuxtModule({
           console.error(error)
         }
       }
-      
+
       storeModels += `${script}\n}`
     }
 

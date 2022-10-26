@@ -1,6 +1,6 @@
 {
   "name": "nuxt3-pinia",
-  "version": "1.0.10",
+  "version": "1.0.11",
   "description": "Nuxt3 module with autoimport and secure persist(localstorage, sessionstoage, cookie), expire option for pinia",
   "main": "index.js",
   "scripts": {
