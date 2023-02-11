@@ -5,6 +5,7 @@ export default defineNuxtPlugin(async nuxt => {
   nuxt[appName] = pinia
   nuxt.vueApp.use(pinia)
   nuxt[appName].stores = reactive({})
+  nuxt[appName].isLoaded = ref(false)
 
   const provide = {}
   provide[provideName] = nuxt[appName].stores
@@ -12,6 +13,9 @@ export default defineNuxtPlugin(async nuxt => {
   Object.keys(storeModels).forEach(route => {
     const query = route.replace('$storeModel_', '').replace('$_default', '').replace(/\$_/g, '/')
     const state = defineStore(query, storeModels[route])
+    state.$setup = reactive({
+      $persist: false
+    })
     
     if (process.client) {
       let { persist, expire, expirein, version } = typeof storeModels[route] == 'function' ? storeModels[route]() : storeModels[route]
@@ -43,7 +47,8 @@ export default defineNuxtPlugin(async nuxt => {
             if (version) window[storageType].setItem(`${query}_version`, version)
             else window[storageType].removeItem(`${query}_version`)
           })
-          state.$persist = storageType
+          state.$setup.$persist = storageType
+          nuxt[appName].isLoaded.value = true
         }
         switch (persist.toLowerCase()) {
           case 'localstorage':

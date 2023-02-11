@@ -198,13 +198,26 @@ export default {
 Stores with persist option can see persist point in time through the $persist property of the store
 ```vue
 <template>
-<div v-if="store.$persist">
+<div v-if="store.$setup.$persist">
 {{store.foo}}
 </div>
 </template>
 
 <script setup>
 const store = getStore('default')
+</script>
+```
+Or you can use isStoreLoaded function instead of $persist to match the hydration time
+```vue
+<template>
+<div v-if="isLoaded">
+{{store.foo}}
+</div>
+</template>
+
+<script setup>
+const store = getStore('default')
+const isLoaded = isStoreLoaded()
 </script>
 ```
 

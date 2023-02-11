@@ -46,3 +46,8 @@ export const defineStore = (name = 'default', option) => {
   store.toRefs = () => storeToRefs(store)
   return store
 }
+
+export const isStoreLoaded = () => {
+  const { public: { pinia: { appName } } } = useRuntimeConfig()
+  return useNuxtApp()[`${appName}`].isLoaded
+}

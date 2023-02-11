@@ -2,7 +2,7 @@ import type { ToRefs } from 'vue'
 import type {
   Store as _Store,
   defineStore as _defineStore,
-  storeToRefs as _storeToRefs,
+  storeToRefs,
   DefineStoreOptions,
   StoreDefinition,
   StateTree,
@@ -18,11 +18,13 @@ import type {
 
 type PersistStorage = 'localStorage' | 'sessionStorage'
 export interface Store<Id, S, G, A> extends _Store {
-  $persist: boolean | PersistStorage,
-  toRefs(): ToRefs<StoreState<S>>
+  $setup: {
+    $persist: boolean | PersistStorage
+  },
+  toRefs(): storeToRefs<StoreState<S>>
 }
 
-export const storeToRefs = _storeToRefs
+export declare function isStoreLoaded(): boolean
 
 export declare function getStore<Id extends string, S extends StateTree = {}, G extends _GettersTree<S> = {}, A = {}>(id: Id, options: Omit<DefineStoreOptions<Id, S, G, A>, 'id'>): Store<Id, S, G, A> 
 export declare function getStore<Id extends string, S extends StateTree = {}, G extends _GettersTree<S> = {}, A = {}>(options: DefineStoreOptions<Id, S, G, A>): Store<Id, S, G, A> 
